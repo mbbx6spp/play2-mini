@@ -1,4 +1,4 @@
-package com.example 
+package com.example
 
 import com.typesafe.play.mini._
 import play.api.mvc._
@@ -7,14 +7,14 @@ import play.api.mvc.Results._
 /**
  * this application is registered via Global
  */
-object App extends Application { 
+object App extends Application {
   def route = Routes(
-  	Through("/people/(.*)".r) {groups: List[String] =>
-      Action{ 
-      	val id :: Nil = groups
-      	Ok(<h1>It works with regex!, id: {id}</h1>).as("text/html")	
+    Through("/people/(.*)".r) {groups: List[String] =>
+      Action{
+        val id :: Nil = groups
+        Ok(<h1>It works with regex!, id: {id}</h1>).as("text/html")
       }
-  	}, 
+    },
     {
     case GET(Path("/coco")) & QueryString(qs) => Action{ request =>
         println(request.body)
@@ -24,13 +24,13 @@ object App extends Application {
 
     case GET(Path("/cocoa")) => Action{ request =>
         Ok(<h1>It works with extractors!</h1>).as("text/html") }
-        
-  	},
-      Through("/flowers/id/") {groups: List[String] =>
-        Action{ 
-          val id :: Nil = groups
-          Ok(<h1>It works with simple startsWith! -  id: {id}</h1>).as("text/html") 
-        }
+
+    },
+    Through("/flowers/id/") {groups: List[String] =>
+      Action{
+        val id :: Nil = groups
+        Ok(<h1>It works with simple startsWith! -  id: {id}</h1>).as("text/html")
       }
+  }
   )
 }
